@@ -46,8 +46,6 @@ const printTracks = library => {
   }
 };
 
-
-
 // prints a list of tracks for a given playlist, using the following format:
 // p01: Coding Music - 2 tracks
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
@@ -69,10 +67,6 @@ const addTrackToPlaylist = function(trackId, playlistId) {
   }
   console.log(`Added ${library.tracks[trackId].name} by ${library.tracks[trackId].artist} (${library.tracks[trackId].album}) to ${library.playlists[playlistId].name}`);
 }; 
-addTrackToPlaylist('t03', 'p01');
-printPlaylist('p01');
-console.log(library.playlists.p01.tracks);
-
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
@@ -83,14 +77,26 @@ const generateUid = function() {
 
 // adds a track to the library
 const addTrack = function(name, artist, album) {
+  const id = generateUid();
+  library.tracks[id] = {
+    id: id,
+    name: name,
+    artist: artist,
+    album: album,
+    tracks: []
+  }
+};
 
-}
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
-
-}
+  const id = generateUid();
+  library.playlists[id] = {
+    id: id,
+    name: name
+  }
+};
 
 
 // STRETCH:
