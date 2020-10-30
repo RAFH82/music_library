@@ -60,11 +60,18 @@ const printPlaylist = (playlistId) => {
   }
 };  
 
-
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
-
-}
+  if (library.tracks[trackId]) {
+    library.playlists[playlistId].tracks.push(trackId);
+  } else {
+    console.log('This track Id does not exist in Library');
+  }
+  console.log(`Added ${library.tracks[trackId].name} by ${library.tracks[trackId].artist} (${library.tracks[trackId].album}) to ${library.playlists[playlistId].name}`);
+}; 
+addTrackToPlaylist('t03', 'p01');
+printPlaylist('p01');
+console.log(library.playlists.p01.tracks);
 
 
 // generates a unique id
