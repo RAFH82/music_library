@@ -20,7 +20,52 @@ const library = {
                       name: "Other Playlist",
                       tracks: ["t03"]
                     }
-             }
+             },
+  printPlaylists() {
+    for (key in this.playlists) {
+      console.log(`${this.playlists[key].id}: ${this.playlists[key].name} - ${this.playlists[key].tracks.length} tracks`);
+    }
+  },
+  printTracks() {
+    for (key in this.tracks) {
+      console.log(`${this.tracks[key].id}: ${this.tracks[key].name} by ${this.tracks[key].artist} (${this.tracks[key].album})`);
+    }
+  },
+  printPlaylist(playlistId) {
+    const tracklist = this.playlists[playlistId].tracks;
+    console.log(`${this.playlists[playlistId].id}: ${this.playlists[playlistId].name} - ${this.playlists[playlistId].tracks.length} track(s)`);
+    for (track of tracklist) {
+      console.log(`${this.tracks[track].id}: ${this.tracks[track].name} by ${this.tracks[track].artist} (${this.tracks[track].album})`);
+    }
+  },
+  addTrackToPlaylist(trackId, playlistId) {
+    if (this.tracks[trackId]) {
+      this.playlists[playlistId].tracks.push(trackId);
+    } else {
+      console.log('This track Id does not exist in Library');
+    }
+    console.log(`Added ${this.tracks[trackId].name} by ${this.tracks[trackId].artist} (${this.tracks[trackId].album}) to ${this.playlists[playlistId].name}`);
+  },
+  generateUid() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  },
+  addTrack(name, artist, album) {
+    const id = this.generateUid();
+    this.tracks[id] = {
+      id: id,
+      name: name,
+      artist: artist,
+      album: album
+    }
+  },
+  addPlaylist(name) {
+    const id = this.generateUid();
+    this.playlists[id] = {
+      id: id,
+      name: name,
+      tracks: []
+    }
+  }
 };
 
 /////////////////////////////
